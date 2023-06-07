@@ -4,8 +4,12 @@
 
 <a href="https://discord.com/users/1067204055929192548">My discord profile</a>
 
-<p>Information about the code <br>
-    You need the library discord.py for this code</p>
+<p>Information about the code: <br>
+    <a href="https://www.python.org/">Install Python</a> <br>
+    <a href="https://github.com/Rapptz/discord.py">Install discord.py</a> <br>
+    <a href="https://discord.com/developers/applications">Create a bot and copy the token</a>
+</p>
+    
 
 <a href="https://discordpy.readthedocs.io/en/stable/">discord.py Docs</a> <br>
 <a href="https://github.com/Rapptz/discord.py">discord.py Github</a>
