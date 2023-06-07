@@ -1,0 +1,116 @@
+import discord, sqlite3
+from discord.ext import commands
+from discord import app_commands
+
+# Connect to your sqlite database
+your_database = sqlite3.connect("Ticket_System/tickets.db")
+your_cursor = your_database.cursor()
+
+# This is a simple ticket bot. Have fun with your new ticket bot. 
+# If you have any questions or problems then you can send me a private message on discord - Milyaket#9669
+# My projects https://github.com/Milyaket
+
+
+# If you have team roles then you can add this here.
+roles = [] # Example: [123] or if you have more roles [123, 1234, 12345]
+
+
+class ticket_setup(commands.Cog):
+    def __init__(self, bot):
+        self.bot = bot
+
+    # Create a ticket group
+    ticket_group = app_commands.Group(name="ticket", description="Made by Milyaket#9669")
+
+    @commands.Cog.listener()
+    async def on_ready(self):
+        # When the bot goes online, it creates a database table if it doesn't exist
+        your_cursor.execute("CREATE TABLE IF NOT EXISTS setup(guild INTEGER, channel INTEGER, category INTEGER)")
+        your_cursor.execute("CREATE TABLE IF NOT EXISTS user_tickets(guild INTEGER, user INTEGER, ticket_channel INTEGER)")
+        await self.bot.tree.sync() # Synchronizes the commands with the servers
+        self.bot.add_view(view=ticket_view())
+
+
+    @ticket_group.command(description="Ticket Setup | Made by Milyaket#9669")
+    @app_commands.describe(channel="Select the ticket channel | Made by Milyaket#9669", category="Select the ticket category | Made by Milyaket#9669")
+    async def setup(self, interaction: discord.Interaction, channel: discord.TextChannel, category: discord.CategoryChannel):
+        # The old ticket setup will be deleted if one exists
+        your_cursor.execute("DELETE FROM setup WHERE guild = ?", (interaction.guild.id,))
+        your_database.commit()
+        
+        # Add this ticket setup
+        await add_setup(interaction=interaction, channel=channel, category=category)
+
+
+
+
+
+async def setup(bot):
+    await bot.add_cog(ticket_setup(bot=bot))
+
+
+
+
+class ticket_view(discord.ui.View):
+    def __init__(self):
+        super().__init__(timeout=None)
+
+    @discord.ui.button(label="Open tickets", style=discord.ButtonStyle.gray, custom_id="open_tickets")
+    async def open_ticket(self, interaction: discord.Interaction, button: discord.Button):
+        await if_ticket_exists(interaction=interaction)
+
+
+
+
+
+
+async def add_setup(interaction: discord.Interaction, channel: discord.TextChannel, category: discord.CategoryChannel):
+    # All data is now written to the database.
+    your_cursor.execute("INSERT INTO setup(guild, channel, category) VALUES(?, ?, ?)", (interaction.guild.id, channel.id, category.id))
+    your_database.commit()
+
+    await interaction.response.send_message(content="You have successfully add this setup on your guild.", ephemeral=True)
+    # Send the ticket message
+    await channel.send(content="Create a ticket \nSource Code: https://github.com/Milyaket", view=ticket_view())
+
+
+
+
+
+async def if_ticket_exists(interaction: discord.Interaction):
+    # Here it is checked whether there is already a ticket
+    ticket_exists = your_cursor.execute("SELECT ticket_channel FROM user_tickets WHERE guild = ? AND user = ?", (interaction.guild.id, interaction.user.id)).fetchone()
+
+    if ticket_exists:
+        for channel in interaction.guild.channels:
+            if channel.id == ticket_exists[0]:
+                # If a ticket exists, an error message will be sent
+                return await interaction.response.send_message(content=f"You have already open a ticket {channel.mention}.", ephemeral=True)
+            
+        # If no ticket exists, the entry is removed from the database
+        your_cursor.execute("DELETE FROM user_tickets WHERE guild = ? AND user = ?", (interaction.guild.id, interaction.user.id))
+        your_database.commit()
+
+    # Opens a ticket if one hasn't already been opened.
+    await open_a_ticket(interaction=interaction)
+
+
+
+
+
+async def open_a_ticket(interaction: discord.Interaction):
+    ticket_category = your_cursor.execute("SELECT category FROM setup WHERE guild = ?", (interaction.guild.id,)).fetchone()
+    category = interaction.guild.get_channel(ticket_category[0])
+
+    # Checks if the category still exists, if not just continue without category.
+    if category:
+        ticket_channel = await interaction.guild.create_text_channel(name=f"{interaction.user.name}", reason=f"Open a ticket for {interaction.guild.id}", category=category)
+    else:
+        ticket_channel = await interaction.guild.create_text_channel(name=f"{interaction.user.name}", reason=f"Open a ticket for {interaction.guild.id}")
+
+    # Ticket data is written to the database
+    your_cursor.execute("INSERT INTO user_tickets(guild, user, ticket_channel) VALUES(?, ?, ?)", (interaction.guild.id, interaction.user.id, ticket_channel.id))
+    your_database.commit()
+
+    await interaction.response.send_message(content=f"You have successfully open a new ticket {ticket_channel.mention}.", ephemeral=True)
+    await ticket_channel.send(content=f"Hello {interaction.user.mention}. \nSource Code: https://github.com/Milyaket")
