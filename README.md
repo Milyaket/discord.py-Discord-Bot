@@ -12,7 +12,6 @@
 
 
 <p>Useful:</p>
-
 <a href="https://discordpy.readthedocs.io/en/stable/">discord.py Docs</a> <br>
 <a href="https://github.com/Rapptz/discord.py">discord.py Github</a>
 
