@@ -16,5 +16,6 @@ async def setup_hook():
 
     print(bot.user.name + " is online.")
 
+    
 # Run your bot
 bot.run(token=os.getenv("TOKEN"))
