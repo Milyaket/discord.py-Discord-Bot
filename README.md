@@ -7,7 +7,7 @@
 <p>Information about the code: <br>
     <a href="https://www.python.org/">Install Python</a> <br>
     <a href="https://github.com/Rapptz/discord.py">Install discord.py</a> <br>
-    <a href="https://discord.com/developers/applications">Create a bot, copy the token and paste the token to the .env file</a>
+    <a href="https://discord.com/developers/applications">Create a bot, copy the token and paste the token in the .env file</a>
 </p>
 
 
