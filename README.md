@@ -10,6 +10,7 @@
 <a href="https://discordpy.readthedocs.io/en/stable/">discord.py Docs</a> <br>
 <a href="https://github.com/Rapptz/discord.py">discord.py Github</a>
 
-<p>Please read the license for the codes. <br>
+<p>If you like my project, I would be very happy about a star. <br>
+    Please read the license for the codes. <br>
     Thank you for your attention
 </p>
