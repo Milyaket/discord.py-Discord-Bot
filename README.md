@@ -11,10 +11,11 @@
 </p>
 
 
-<p>Useful:</p>
-<a href="https://discordpy.readthedocs.io/en/stable/">discord.py Docs</a> <br>
-<a href="https://github.com/Rapptz/discord.py">discord.py Github</a>
-
+<p>Useful: <br>
+    <a href="https://discordpy.readthedocs.io/en/stable/">discord.py Docs</a> <br>
+    <a href="https://github.com/Rapptz/discord.py">discord.py Github</a>
+</p>
+    
 <p>Please read the license for the codes. <br>
     Thank you for your attention
 </p>
