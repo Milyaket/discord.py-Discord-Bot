@@ -1,21 +1,22 @@
-<p>Welcome! <br> <br>
-    If you have any problems or questions, please feel free to contact me. <br>
-    If my projects help you, I would be very happy about a small voluntary donation or a star for this project.</p>
+<h1 align="center">👋 Welcome to my Github repository</h1>
 
-<a href="https://discord.com/users/1067204055929192548">My discord profile</a>
-
-<p>Information about the code: <br>
-    <a href="https://www.python.org/">Install Python</a> <br>
-    <a href="https://github.com/Rapptz/discord.py">Install discord.py</a> <br>
-    <a href="https://discord.com/developers/applications">Create a bot, copy the token and paste the token in the .env file</a>
+<p align="center">
+    I hope you like this project. <br>
+    If you have any other requests that might be added to this project, feel free to <a href="https://discord.com/users/1067204055929192548">contact me on Discord</a>. <br><br>
 </p>
 
 
-<p>Useful: <br>
-    <a href="https://discordpy.readthedocs.io/en/stable/">discord.py Docs</a> <br>
-    <a href="https://github.com/Rapptz/discord.py">discord.py Github</a>
+<p align="center">
+    <font face="Arial", size="4">Information:</font> <br>
+    ▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬ <br>
+    • <a href="https://www.python.org/">Install Python</a> <br>
+    • <a href="https://github.com/Rapptz/discord.py">Install discord.py</a> <br>
+    • <a href="https://discord.com/developers/applications">Create a new discord bot</a> <br>
+    Once you have followed these steps, take the token from your created bot and paste it into the .env file. <br>
+    ▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬
 </p>
-    
-<p>Please read the license for the codes. <br>
-    Thank you for your attention
+
+<p align="center">
+    If you want to support me, feel free to do so, just get in touch with me on <a href="https://discord.com/users/1067204055929192548">discord</a>. <br>
+    Have fun with your new discord bot. 
 </p>
