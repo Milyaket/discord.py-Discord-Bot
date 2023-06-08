@@ -5,7 +5,6 @@
     If you have any other requests that might be added to this project, feel free to <a href="https://discord.com/users/1067204055929192548">contact me on Discord</a>. <br>
 </p>
 
-
 <p align="center">
     <font face="Arial", size="4">Information:</font> <br>
     ▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬ <br>
