@@ -34,13 +34,15 @@ class ticket_setup(commands.Cog):
     @ticket_group.command(description="Ticket Setup | Made by Milyaket#9669")
     @app_commands.describe(channel="Select the ticket channel | Made by Milyaket#9669", category="Select the ticket category | Made by Milyaket#9669")
     async def setup(self, interaction: discord.Interaction, channel: discord.TextChannel, category: discord.CategoryChannel):
-        # The old ticket setup will be deleted if one exists
-        your_cursor.execute("DELETE FROM setup WHERE guild = ?", (interaction.guild.id,))
-        your_database.commit()
-        
-        # Add this ticket setup
-        await add_setup(interaction=interaction, channel=channel, category=category)
+        if interaction.user.guild_permissions.administrator:
+            # The old ticket setup will be deleted if one exists
+            your_cursor.execute("DELETE FROM setup WHERE guild = ?", (interaction.guild.id,))
+            your_database.commit()
 
+            # Add this ticket setup
+            await add_setup(interaction=interaction, channel=channel, category=category)
+        else:
+            await interaction.response.send_message(content="You don't have permissions for this command.", ephemeral=True)
 
 
 
