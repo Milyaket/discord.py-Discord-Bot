@@ -5,7 +5,7 @@ from discord.ext import commands
 bot = commands.Bot(command_prefix="!", intents=discord.Intents.all())
 
 # All cog folders comes here
-cogs = ["Ticket_System"]
+cogs = ["Ticket_System", "Flag_Quiz"]
 
 @bot.event
 async def setup_hook():
