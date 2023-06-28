@@ -27,7 +27,6 @@ class ticket_setup(commands.Cog):
         # When the bot goes online, it creates a database table if it doesn't exist
         your_cursor.execute("CREATE TABLE IF NOT EXISTS setup(guild INTEGER, channel INTEGER, category INTEGER)")
         your_cursor.execute("CREATE TABLE IF NOT EXISTS user_tickets(guild INTEGER, user INTEGER, ticket_channel INTEGER)")
-        await self.bot.tree.sync() # Synchronizes the commands with the servers
         self.bot.add_view(view=ticket_view())
 
 
