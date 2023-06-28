@@ -23,8 +23,7 @@ class flag_setup(commands.Cog):
     @commands.Cog.listener()
     async def on_ready(self):
         your_cursor.execute("CREATE TABLE IF NOT EXISTS setup(guild INTEGER, channel INTEGER, country TEXT, flag_url TEXT)")
-        await self.bot.tree.sync() # Synchronizes the commands with the servers
-
+        
 
     @commands.Cog.listener()
     async def on_message(self, message: discord.Message):
