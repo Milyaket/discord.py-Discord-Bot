@@ -1,4 +1,4 @@
-import discord, sqlite3, requests, random
+import discord, sqlite3, random, aiohttp
 from discord.ext import commands
 from discord import app_commands
 
@@ -59,10 +59,12 @@ async def setup(bot):
 
 
 
-
-def get_country():
+async def get_country():
     # Get random country
-    country = random.choice(requests.get(get_flags).json())
+    async with aiohttp.ClientSession() as client_session:
+        async with client_session.get(url=get_flags) as request:
+            country = random.choice(await request.json())
+    
     country_name = country['name']['common']
     country_flag_url = country['flags']['png']
     # Returns the country name and country flag
@@ -80,7 +82,7 @@ def quiz_embed(url):
 
 async def add_setup(interaction: discord.Interaction, channel: discord.TextChannel):
     # Get the country name and the flag
-    country_name, country_flag_url = get_country()
+    country_name, country_flag_url = await get_country()
     # Adds the setup
     your_cursor.execute("INSERT INTO setup(guild, channel, country, flag_url) VALUES(?, ?, ?, ?)", (interaction.guild.id, channel.id, country_name, country_flag_url))
     your_database.commit()
@@ -102,7 +104,7 @@ async def remove_setup(interaction: discord.Interaction):
 async def check_player_input(message: discord.Message, country):
     if message.content.lower() == country[0].lower():
         # Get new country
-        country_name, country_flag_url = get_country()
+        country_name, country_flag_url = await get_country()
         # Update the database
         your_cursor.execute("UPDATE setup SET country = ?, flag_url = ? WHERE guild = ?", (country_name, country_flag_url, message.guild.id))
         your_database.commit()
